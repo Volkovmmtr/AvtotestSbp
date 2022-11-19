@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    @Description("Авторизация в интернет банке БСБП")
+    @Description("Авторизация в интернет банке БСБП ")
     void test2() {
     }
 }
