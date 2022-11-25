@@ -1,5 +1,6 @@
 package APITest;
 
+import APITest.requests.GetToken;
 import io.qameta.allure.okhttp3.AllureOkHttp3;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -9,7 +10,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import java.time.Duration;
 
 public class Api {
-    public static BaseAPI baseAPI;
+    public static GetToken getToken;
 
     static {
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -19,13 +20,12 @@ public class Api {
                 .addInterceptor(new AllureOkHttp3()) //подключение Allure
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://127.0.0.1:8090")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://restful-booker.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())//mvn
                 .addConverterFactory(ScalarsConverterFactory.create())//mvn
                 .client(client)
                 .build();
 
-        baseAPI = retrofit.create(BaseAPI.class);
+        getToken = retrofit.create(GetToken.class);
     }
 }
