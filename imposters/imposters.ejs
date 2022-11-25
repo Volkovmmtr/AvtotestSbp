@@ -1,25 +1,9 @@
 {
-  "imposters": [
-    {
-      "protocol": "http",
-      "port": 8090,
-      "stubs": [
-        {
-          "responses": [
-            {
-              "is": {
-                "statusCode": 200,
-                "headers": {
-                  "Content-Type": "application/json"
-                },
-                "body": {
-                  "value": "Hello World!!"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    }
+  "protocol": "http",
+  "port": 8090,
+  "stubs": [
+    <% include ./GET/mirror.ejs %>,
+    <% include ./GET/returnSomeData.ejs %>,
+    <% include ./GET/helloWorld.ejs %>
   ]
 }

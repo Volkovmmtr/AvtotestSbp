@@ -2,7 +2,7 @@ version: "3"
 services:
   mountebank:
     container_name: mountebank
-    image: jkris/mountebank:2.4.0
+    image: bbyars/mountebank:2.4.0
     volumes:
       - ./imposters:/imposters
     ports:
