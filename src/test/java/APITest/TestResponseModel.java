@@ -10,5 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TestResponseModel {
+    //Имя переменной должно быть эквивалентно имени ключа JSON файла
     private String value;
 }
