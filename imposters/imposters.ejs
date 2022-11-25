@@ -1,0 +1,25 @@
+{
+  "imposters": [
+    {
+      "protocol": "http",
+      "port": 8090,
+      "stubs": [
+        {
+          "responses": [
+            {
+              "is": {
+                "statusCode": 200,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "message": "Hello World!!"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
