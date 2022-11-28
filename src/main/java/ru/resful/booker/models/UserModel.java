@@ -1,4 +1,4 @@
-package APITest.models.requests;
+package ru.resful.booker.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class User {
+public class UserModel {
 
     private String username;
     private String password;
