@@ -18,14 +18,14 @@ import java.util.concurrent.TimeUnit;
 public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
-    public static AuthClient anonimClient() {
+    public static EndpointProvider anonimClient() {
 
         OkHttpClient client = new OkHttpClient();
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         setConfig(builder);
         builder.build();
 
-        return getBaseRetrofit(client).create(AuthClient.class);
+        return getBaseRetrofit(client).create(EndpointProvider.class);
     }
 
     public static EndpointProvider authenticatedClientBasic(UserModel user) {
