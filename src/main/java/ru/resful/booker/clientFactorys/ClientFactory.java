@@ -27,27 +27,6 @@ public class ClientFactory {
         return getBaseRetrofit(client).create(UserClient.class);
     }
 
-    /*
-    public static UserClient authenticatedClient(UserModel user) {
-
-        OkHttpClient client = new OkHttpClient();
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(
-                chain -> {
-                    Request newRequest = chain.request().newBuilder()
-                            .addHeader("Authorization", "Bearer " + TokenRepo.getToken(user))
-                            .build();
-                    return chain.proceed(newRequest);
-                }
-        );
-
-        setConfig(builder);
-        builder.build();
-
-
-        return getBaseRetrofit(client).create(UserClient.class);
-    }
-     */
     public static UserClient authenticatedClientBasic(UserModel user) {
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
@@ -64,15 +43,12 @@ public class ClientFactory {
     public static UserClient authenticatedClientTokenInCookie(UserModel user) {
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        //todo cookieJar
+        setConfig(builder);
         builder.addInterceptor(chain -> {
-            Request newRequest = chain.request().newBuilder().addHeader("Cookie", "token:" + TokenRepo.getToken(user)).build();
+            Request newRequest = chain.request().newBuilder()
+                    .addHeader("Cookie", "token=" + TokenRepo.getToken(user)).build();
             return chain.proceed(newRequest);
         });
-
-        setConfig(builder);
-        builder.build();
-
 
         return getBaseRetrofit(builder.build()).create(UserClient.class);
     }

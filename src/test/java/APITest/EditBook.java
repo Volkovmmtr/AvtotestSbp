@@ -22,7 +22,7 @@ public class EditBook {
     public void test() {
 
         //UserClient client = ClientFactory.authenticatedClientBasic(adm);
-        UserClient client = ClientFactory.authenticatedClientBasic(adm);
+        UserClient client = ClientFactory.authenticatedClientTokenInCookie(adm);
 
         Response<BookingModel> book = client.editBook(4633, new BookingModel()
                 .setFirstname("gseg")
