@@ -3,7 +3,8 @@ package APITest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
-import ru.resful.booker.APIClients.UserClient;
+import ru.resful.booker.APIClients.EndpointProvider;
+import ru.resful.booker.APIClients.booker.AuthClient;
 import ru.resful.booker.clientFactorys.ClientFactory;
 import ru.resful.booker.models.BookingModel;
 import ru.resful.booker.models.UserModel;
@@ -22,7 +23,7 @@ public class EditBook {
     public void test() {
 
         //UserClient client = ClientFactory.authenticatedClientBasic(adm);
-        UserClient client = ClientFactory.authenticatedClientTokenInCookie(adm);
+        EndpointProvider client = ClientFactory.authenticatedClientTokenInCookie(adm);
 
         Response<BookingModel> book = client.editBook(4633, new BookingModel()
                 .setFirstname("gseg")
@@ -37,8 +38,6 @@ public class EditBook {
                 )
                 .setAdditionalneeds("Breakfast")
         ).execute();
-
-        book.body();
 
     }
 

@@ -1,11 +1,11 @@
-package ru.resful.booker.APIClients;
+package ru.resful.booker.APIClients.booker;
 
 import retrofit2.Call;
 import retrofit2.http.*;
 import ru.resful.booker.models.BookingModel;
 
 public interface BookingClient {
-
+    @Headers({"Accept: application/json"})
     @GET("/booking")
     Call<BookingModel> getBookingIDs();
 
@@ -16,5 +16,6 @@ public interface BookingClient {
 
 
     @PUT("/booking/{id}")
+    @Headers({"Accept: application/json"})
     Call<BookingModel> editBook(@Path("id") int bookId, @Body BookingModel bookingModel);
 }
