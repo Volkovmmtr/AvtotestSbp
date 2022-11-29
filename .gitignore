@@ -2,3 +2,4 @@ build/reports
 target
 *.class
 .idea/
+ajcore*.txt
