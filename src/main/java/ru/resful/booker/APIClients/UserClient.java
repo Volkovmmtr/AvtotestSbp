@@ -7,7 +7,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import ru.resful.booker.models.UserModel;
 
-public interface UserClient {
+public interface UserClient extends BookingClient{
 
     @POST("/auth")
     @Headers("Content-Type: application/json")

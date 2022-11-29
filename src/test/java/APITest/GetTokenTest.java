@@ -10,17 +10,12 @@ import retrofit2.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class Test1 {
+public class GetTokenTest {
     private static final UserModel adm = new UserModel("admin","password123");
     @SneakyThrows
     @Test
     public void test(){
-
-
-        //Response<TokenModel> model = TokenApi.token.getToken(adm).execute();
-
-        Response<TokenModel> model = ClientFactory.anonimClient().getToken(adm).execute();
+        Response<TokenModel> model = ClientFactory.authenticatedClientBasic(adm).getToken(adm).execute();
         assertThat(model.body().getToken(), notNullValue());
-        //TestResponseModel model1 = Api.baseAPI.getSuccess().execute().body();
     }
 }
