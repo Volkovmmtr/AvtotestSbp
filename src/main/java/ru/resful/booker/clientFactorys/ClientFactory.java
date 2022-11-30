@@ -17,56 +17,49 @@ public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
     public static EndpointProvider anonimClient() {
+        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
 
-        OkHttpClient client = new OkHttpClient();
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        setConfig(builder);
-        builder.build();
-
-        return getBaseRetrofit(client).create(EndpointProvider.class);
+        return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
     }
 
     public static EndpointProvider authenticatedClientBasic(UserModel user) {
-
-        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        setConfig(builder);
-        builder.addInterceptor(chain -> {
+        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
+        okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", Credentials.basic(user.getUsername(), user.getPassword()))
                     .build();
             return chain.proceed(newRequest);
         });
 
-        return getBaseRetrofit(builder.build()).create(EndpointProvider.class);
+        return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
     }
 
     public static EndpointProvider authenticatedClientTokenInCookie(UserModel user) {
-
-        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        setConfig(builder);
-        builder.addInterceptor(chain -> {
+        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
+        okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     .addHeader("Cookie", "token=" + TokenRepo.getToken(user))
                     .build();
             return chain.proceed(newRequest);
         });
 
-        return getBaseRetrofit(builder.build()).create(EndpointProvider.class);
+        return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
     }
 
-    private static void setConfig(OkHttpClient.Builder b) {
-
-        b.callTimeout(Duration.ofSeconds(10))
+    private static OkHttpClient.Builder getConfiguretBuilder() {
+        OkHttpClient.Builder okHttpBuilder = new OkHttpClient().newBuilder();
+        okHttpBuilder.callTimeout(Duration.ofSeconds(10))
                 .connectTimeout(Duration.ofSeconds(10))
                 .readTimeout(Duration.ofSeconds(10))
                 .addInterceptor(new AllureOkHttp3()); //подключение Allure
+        return okHttpBuilder;
     }
 
     private static Retrofit getBaseRetrofit(OkHttpClient client) {
         return new Retrofit.Builder().baseUrl(BASE_URL)
                 //todo XML есть смысл прикручивать?
-                .addConverterFactory(GsonConverterFactory.create())//mvn
-                .addConverterFactory(ScalarsConverterFactory.create())//mvn
+                .addConverterFactory(GsonConverterFactory.create())//mvn ответ\запрос в виде экземпляра
+                .addConverterFactory(ScalarsConverterFactory.create())//mvn ответ\запрос ответа в виде строки
                 .client(client).build();
     }
 
