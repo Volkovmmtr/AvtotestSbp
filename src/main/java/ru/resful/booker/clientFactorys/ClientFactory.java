@@ -8,12 +8,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import ru.resful.booker.APIClients.EndpointProvider;
-import ru.resful.booker.APIClients.booker.AuthClient;
 import ru.resful.booker.auth.TokenRepo;
 import ru.resful.booker.models.UserModel;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
@@ -65,31 +63,11 @@ public class ClientFactory {
     }
 
     private static Retrofit getBaseRetrofit(OkHttpClient client) {
-        return new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())//mvn
+        return new Retrofit.Builder().baseUrl(BASE_URL)
+                //todo XML есть смысл прикручивать?
+                .addConverterFactory(GsonConverterFactory.create())//mvn
                 .addConverterFactory(ScalarsConverterFactory.create())//mvn
                 .client(client).build();
     }
 
-    public static AuthClient create(UserModel user){
-        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        builder.readTimeout(10, TimeUnit.SECONDS);
-        builder.connectTimeout(5, TimeUnit.SECONDS);
-
-
-        builder.addInterceptor(chain -> {
-            Request request = chain.request().newBuilder()
-                    .addHeader("Authorization", Credentials.basic(user.getUsername(), user.getPassword())).build();
-            return chain.proceed(request);
-        });
-
-
-        OkHttpClient client = builder.build();
-
-        Retrofit retrofit =
-                new Retrofit.Builder().baseUrl(BASE_URL).client(client)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-        return retrofit.create(AuthClient.class);
-    }
 }
