@@ -11,11 +11,10 @@ import java.util.Map;
 
 public class UserProvider {
 
-    private static HashMap<String,Map<String,String>> users;
+    private static final HashMap<String,Map<String,String>> users;
 
     static {
         try {
-            //todo разобраться с путем к resources
             users = new Gson().fromJson(Files.newBufferedReader(Paths.get("src/test/resources/users.json")), HashMap.class);
         } catch (IOException e) {
             throw new RuntimeException(e);

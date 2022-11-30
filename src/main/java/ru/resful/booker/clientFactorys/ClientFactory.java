@@ -17,13 +17,13 @@ public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
     public static EndpointProvider anonimClient() {
-        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
+        OkHttpClient.Builder okHttpBuilder = getConfiguredBuilder();
 
         return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
     }
 
     public static EndpointProvider authenticatedClientBasic(UserModel user) {
-        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
+        OkHttpClient.Builder okHttpBuilder = getConfiguredBuilder();
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", Credentials.basic(user.getUsername(), user.getPassword()))
@@ -35,7 +35,7 @@ public class ClientFactory {
     }
 
     public static EndpointProvider authenticatedClientTokenInCookie(UserModel user) {
-        OkHttpClient.Builder okHttpBuilder = getConfiguretBuilder();
+        OkHttpClient.Builder okHttpBuilder = getConfiguredBuilder();
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     .addHeader("Cookie", "token=" + TokenRepo.getToken(user))
@@ -46,7 +46,7 @@ public class ClientFactory {
         return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
     }
 
-    private static OkHttpClient.Builder getConfiguretBuilder() {
+    private static OkHttpClient.Builder getConfiguredBuilder() {
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient().newBuilder();
         okHttpBuilder.callTimeout(Duration.ofSeconds(10))
                 .connectTimeout(Duration.ofSeconds(10))

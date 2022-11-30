@@ -19,9 +19,15 @@ public interface BookingClient {
     //пеередать null если параметр не отправляется
     Call<List<BookingModel>> getBookingIDsFilter(@Query("firstname") String firstname,
                                            @Query("lastname") String lastname);
-
+    @Headers({"Accept: application/json"})
+    @GET("/booking/{id}")
+    Call<BookingModel> getBookById(@Path("id") String id);
 
     @PUT("/booking/{id}")
     @Headers({"Accept: application/json"})
-    Call<BookingModel> editBook(@Path("id") int bookId, @Body BookingModel bookingModel);
+    Call<BookingModel> editBook(@Path("id") String bookId, @Body BookingModel book);
+
+    @POST("booking")
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    Call<BookingModel> addBook(@Body BookingModel book);
 }
