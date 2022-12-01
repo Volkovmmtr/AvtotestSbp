@@ -11,6 +11,7 @@ public interface BookingClient {
 
     //Не перезаписывает заголовки, при наличии дубликатов они будут отправлены
     //так же можно передавать заголовки в параметрах запроса retrofit2.http.Header
+    //Задаем параметры для OkHttp.Request (без ретрофита это пришлось бы делать для каждого нового экземпляра)
     @Headers({"Accept: application/json"})
     @GET("/booking")
     Call<List<BookingModel>> getBookingIDs();
