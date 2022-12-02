@@ -1,6 +1,7 @@
 package ru.resful.booker.clientFactorys;
 
 import io.qameta.allure.okhttp3.AllureOkHttp3;
+import lombok.SneakyThrows;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -42,12 +43,14 @@ public class ClientFactory {
         //+ читаемость -строки кода
     }
 
+    @SneakyThrows
     public static EndpointProvider authenticatedClientTokenInCookie(UserModel user) {
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
+        String token = TokenRepo.getToken(user);
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     // Вызов генерации токена через неавторизованного клиента
-                    .addHeader("Cookie", "token=" + TokenRepo.getToken(user))
+                    .addHeader("Cookie", "token=" + token)
                     .build();
             return chain.proceed(newRequest);
         });
@@ -73,8 +76,9 @@ public class ClientFactory {
         //тут начинается магия Ретрофита
         return new Retrofit.Builder().baseUrl(BASE_URL) //задаем базовый УРЛ для всех запросов (OkHttp так не может, все запросы конфигурируются ручками)
                 //todo XML есть смысл прикручивать?
-                .addConverterFactory(GsonConverterFactory.create())//mvn ответ\запрос в виде экземпляра
+                //Поорядок конвертеров имеет значение. Примитивы следует добавлять до других конвертеров
                 .addConverterFactory(ScalarsConverterFactory.create())//mvn ответ\запрос ответа в виде строки
+                .addConverterFactory(GsonConverterFactory.create())//mvn ответ\запрос в виде экземпляра
                 .client(httpClient).build();
     }
 
