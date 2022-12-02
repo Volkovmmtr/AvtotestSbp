@@ -16,14 +16,19 @@ import java.time.Duration;
 public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
+    // Магия ретрофита
     public static EndpointProvider anonimClient() {
+        // создаём экземпляр сконфигурированного OkHttp билдера
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
-
-        return getBaseRetrofit(okHttpBuilder.build()).create(EndpointProvider.class);
+        // Создаём клиента Retrofit инкапсулирующего OkHttp клиента (okHttpBuilder.build())
+        return getBaseRetrofit(okHttpBuilder.build())
+                // Клиенту передаём описание API в вформате интерфейса
+                .create(EndpointProvider.class);
     }
 
     public static EndpointProvider authenticatedClientBasic(UserModel user) {
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
+        // создаём перехватчика и добавляем в клиент OkHttp. Роль перехватчика - это добавление в хедера авторизации по методы BaseAuth
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", Credentials.basic(user.getUsername(), user.getPassword()))
@@ -41,6 +46,7 @@ public class ClientFactory {
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
+                    // Вызов генерации токена через неавторизованного клиента
                     .addHeader("Cookie", "token=" + TokenRepo.getToken(user))
                     .build();
             return chain.proceed(newRequest);
@@ -49,7 +55,7 @@ public class ClientFactory {
         return getBaseRetrofit(okHttpBuilder.build())
                 .create(EndpointProvider.class);
     }
-
+    // Шаг первый
     //Тут ничего интересного, настраивается OkHttpClient
     //Задаем таймауты и подключаем перехвадчик Аллюра
     private static OkHttpClient.Builder getConfiguredHttpBuilder() {
@@ -57,11 +63,12 @@ public class ClientFactory {
         okHttpBuilder.callTimeout(Duration.ofSeconds(10))
                 .connectTimeout(Duration.ofSeconds(10))
                 .readTimeout(Duration.ofSeconds(10))
+                // обавляем перехватчики, (логи, модификация запроса)
                 .addInterceptor(new AllureOkHttp3()); //подключение Allure
         return okHttpBuilder;
     }
 
-
+    //Настраивается Retrofit
     private static Retrofit getBaseRetrofit(OkHttpClient httpClient) {
         //тут начинается магия Ретрофита
         return new Retrofit.Builder().baseUrl(BASE_URL) //задаем базовый УРЛ для всех запросов (OkHttp так не может, все запросы конфигурируются ручками)
