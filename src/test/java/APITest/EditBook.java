@@ -15,8 +15,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EditBook {
 
-    EndpointProvider client = ClientFactory.authenticatedClientTokenInCookie(
-            UserProvider.getUserByName(Users.ADMIN_ROLE));
+    EndpointProvider client = ClientFactory.getClient(
+            UserProvider.getUserByName(Users.ADMIN_ROLE), true);
 
     //тут у меня вопрос по jupiter
     //Если в классе будет несколько тестов, то у всех будут свои экземпляры?

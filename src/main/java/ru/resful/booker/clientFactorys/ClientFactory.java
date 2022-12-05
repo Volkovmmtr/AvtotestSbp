@@ -18,7 +18,7 @@ public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
     // Магия ретрофита
-    public static EndpointProvider anonimClient() {
+    public static EndpointProvider getClient() {
         // создаём экземпляр сконфигурированного OkHttp билдера
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
         // Создаём клиента Retrofit инкапсулирующего OkHttp клиента (okHttpBuilder.build())
@@ -27,37 +27,32 @@ public class ClientFactory {
                 .create(EndpointProvider.class);
     }
 
-    public static EndpointProvider authenticatedClientBasic(UserModel user) {
+    @SneakyThrows
+    public static EndpointProvider getClient(UserModel user, Boolean useToken) {
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
         // создаём перехватчика и добавляем в клиент OkHttp. Роль перехватчика - это добавление в хедера авторизации по методы BaseAuth
+        String token;
+        if (useToken) token = TokenRepo.getToken(user) ;
+        else {
+            token = null;
+        }
         okHttpBuilder.addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", Credentials.basic(user.getUsername(), user.getPassword()))
+                    .addHeader(
+
+                            useToken ? "Cookie" : "Authorization" ,
+                            useToken ?  "token=" + token : Credentials.basic(user.getUsername(), user.getPassword())
+
+                    )
                     .build();
             return chain.proceed(newRequest);
         });
-
         return getBaseRetrofit(okHttpBuilder.build())
                 .create(EndpointProvider.class); // в этой строке самый смак
         //ретрофит генерирует реализацию RequestBody на основе переданного ему интерфейса
         //+ читаемость -строки кода
     }
 
-    @SneakyThrows
-    public static EndpointProvider authenticatedClientTokenInCookie(UserModel user) {
-        OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
-        String token = TokenRepo.getToken(user);
-        okHttpBuilder.addInterceptor(chain -> {
-            Request newRequest = chain.request().newBuilder()
-                    // Вызов генерации токена через неавторизованного клиента
-                    .addHeader("Cookie", "token=" + token)
-                    .build();
-            return chain.proceed(newRequest);
-        });
-
-        return getBaseRetrofit(okHttpBuilder.build())
-                .create(EndpointProvider.class);
-    }
     // Шаг первый
     //Тут ничего интересного, настраивается OkHttpClient
     //Задаем таймауты и подключаем перехвадчик Аллюра

@@ -1,7 +1,5 @@
 package APITest;
 
-import com.google.gson.JsonObject;
-import ru.resful.booker.APIClients.EndpointProvider;
 import ru.resful.booker.auth.UserProvider;
 import ru.resful.booker.auth.Users;
 import ru.resful.booker.clientFactorys.ClientFactory;
@@ -19,7 +17,7 @@ public class GetTokenTest {
     @SneakyThrows
     @Test
     public void test(){
-        Response<String> model = ClientFactory.anonimClient().getToken(adm).execute();
+        Response<String> model = ClientFactory.getClient().getToken(adm).execute();
         //assertThat(model.body().getToken(), notNullValue());
     }
 }
