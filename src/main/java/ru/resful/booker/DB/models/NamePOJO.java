@@ -8,5 +8,4 @@ import lombok.Getter;
 public class NamePOJO {
     public Integer id;
     public String name;
-
 }

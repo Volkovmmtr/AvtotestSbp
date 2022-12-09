@@ -14,7 +14,7 @@ public class Reader {
 
 
     @SneakyThrows
-    public static List<String> read(String queue) {
+    public static List<String> read(String queue, Boolean cleanQueue) {
         Channel channel = getConnection();
 
         List<String> messages = new ArrayList<String>();
@@ -24,9 +24,7 @@ public class Reader {
             messages.add(message);
         };
 
-        channel.basicConsume(queue, true, deliverCallback, consumerTag -> {});
-
-        channel.basicConsume(queue, true, deliverCallback, new CancelCallback() {
+        channel.basicConsume(queue, cleanQueue, deliverCallback, new CancelCallback() {
             public void handle(String consumerTag) throws IOException {
             }});
 

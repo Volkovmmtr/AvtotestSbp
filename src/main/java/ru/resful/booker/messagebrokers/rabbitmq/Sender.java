@@ -12,9 +12,9 @@ import static ru.resful.booker.messagebrokers.rabbitmq.ConnectionProvider.getCon
 public class Sender {
 
     @SneakyThrows
-    public static void sendMessage(String queue, String message){
+    public static void sendMessage(String queue, String message) {
         Channel channel = getConnection();
-        channel.queueDeclare(queue,false,false,false,null);
-        channel.basicPublish("",queue,null,message.getBytes());
+        channel.queueDeclare(queue, false, false, false, null);
+        channel.basicPublish("", queue, null, message.getBytes());
     }
 }
