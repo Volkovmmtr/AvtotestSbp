@@ -17,7 +17,7 @@ public class DBSteps {
 
 
     public NamePOJO getById(Integer id){
-        return jdbi.withExtension(DBDao.class, query -> query.getNameByIds(id)).get(0);
+        return jdbi.withExtension(DBDao.class, query -> query.getNameById(id)).get(0);
     }
 
 }

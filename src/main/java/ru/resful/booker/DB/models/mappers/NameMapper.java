@@ -11,13 +11,15 @@ import java.sql.SQLException;
 //из области фантастики?
 public class NameMapper implements RowMapper<NamePOJO> {
 
-    /*
+
     public NamePOJO map(ResultSet rs, StatementContext ctx) throws SQLException {
         return new NamePOJO(rs.getInt("id"), rs.getString("name"));
     }
-     */
 
+    /*
     public NamePOJO map(ResultSet rs, StatementContext ctx) throws SQLException {
         return new NamePOJO(rs.getInt("A_ID"), rs.getString("A_NAME"));
     }
+
+     */
 }

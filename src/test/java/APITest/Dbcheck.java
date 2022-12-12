@@ -1,6 +1,8 @@
 package APITest;
 
 import APITest.testExtentions.DBInjector;
+import com.google.inject.Key;
+import com.google.inject.name.Names;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,9 @@ public class Dbcheck extends DBInjector{
     private DBSteps dbSteps;
     @BeforeEach
     public void preconditions(){
-        DBConnection connection = DBInjector.getInjector().getInstance(DBConnection.class);
-        dbSteps = new DBSteps(connection);
+        dbSteps = new DBSteps(
+                DBInjector.getInjector().getInstance(Key.get(DBConnection.class, Names.named("Postgres")))
+        );
     }
 
     @SneakyThrows
