@@ -7,13 +7,13 @@ import lombok.SneakyThrows;
 
 import java.nio.charset.StandardCharsets;
 
-import static ru.resful.booker.messagebrokers.rabbitmq.ConnectionProvider.getConnection;
+import ru.resful.booker.messagebrokers.rabbitmq.ConnectionProvider;
 
 public class Sender {
 
     @SneakyThrows
     public static void sendMessage(String queue, String message) {
-        Channel channel = getConnection();
+        Channel channel = ConnectionProvider.getConnection();
         channel.queueDeclare(queue, false, false, false, null);
         channel.basicPublish("", queue, null, message.getBytes());
     }

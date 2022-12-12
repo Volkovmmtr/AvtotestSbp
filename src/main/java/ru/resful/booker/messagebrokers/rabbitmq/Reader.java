@@ -8,14 +8,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.resful.booker.messagebrokers.rabbitmq.ConnectionProvider.getConnection;
+import ru.resful.booker.messagebrokers.rabbitmq.ConnectionProvider;
 
 public class Reader {
 
 
     @SneakyThrows
     public static List<String> read(String queue, Boolean cleanQueue) {
-        Channel channel = getConnection();
+        Channel channel = ConnectionProvider.getConnection();
 
         List<String> messages = new ArrayList<String>();
 
