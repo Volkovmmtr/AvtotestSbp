@@ -10,9 +10,9 @@ import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 public class PSQLConn implements DBConnection{
 
     @Getter
-    public Jdbi jdbi = provideConnection();
+    public Jdbi jdbi = setConnection();
 
-    private Jdbi provideConnection() {
+    private Jdbi setConnection() {
         return Jdbi.create(ConnectionConfigProvider.getConfig().getPsqlUrl(),
                         ConnectionConfigProvider.getConfig().getPsqlUsername(),
                         ConnectionConfigProvider.getConfig().getPsglPassword())

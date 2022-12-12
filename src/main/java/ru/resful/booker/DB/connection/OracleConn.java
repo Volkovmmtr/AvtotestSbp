@@ -1,6 +1,5 @@
 package ru.resful.booker.DB.connection;
 
-import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import org.jdbi.v3.core.Jdbi;
@@ -10,9 +9,9 @@ import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 public class OracleConn implements DBConnection{
 
     @Getter
-    public Jdbi jdbi = provideConnection();
+    public Jdbi jdbi = setConnection();
 
-    private Jdbi provideConnection() {
+    private Jdbi setConnection() {
         return Jdbi.create(ConnectionConfigProvider.getConfig().getOracleUrl(),
                         ConnectionConfigProvider.getConfig().getOracleName(),
                         ConnectionConfigProvider.getConfig().getOraclePassword())
