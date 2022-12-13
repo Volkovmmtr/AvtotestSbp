@@ -19,12 +19,12 @@ import static org.hamcrest.Matchers.notNullValue;
         @Tag("API_AUTH")
 
 })
-@DisplayName("Get token test")
 public class GetTokenTest {
     private static final UserModel adm = UserProvider.getUserByName(Users.ADMIN_ROLE);
 
     @SneakyThrows
     @Test
+    @DisplayName("Get token test")
     public void test(){
         Response<String> model = ClientFactory.getClient().getToken(adm).execute();
         //assertThat(model.body().getToken(), notNullValue());
