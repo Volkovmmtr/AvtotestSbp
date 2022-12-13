@@ -23,7 +23,6 @@ public class KafkaCheckTest {
     @SneakyThrows
     @Test
     public void test() {
-        Thread.sleep(15000);
         String msg = RandomStringUtils.random(14,true,false);
 
         Sender.sendMessage("test.topic",msg);

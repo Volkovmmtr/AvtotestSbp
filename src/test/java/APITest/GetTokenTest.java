@@ -24,7 +24,6 @@ public class GetTokenTest {
     @SneakyThrows
     @Test
     public void test(){
-        Thread.sleep(15000);
         Response<String> model = ClientFactory.getClient().getToken(adm).execute();
         //assertThat(model.body().getToken(), notNullValue());
     }
