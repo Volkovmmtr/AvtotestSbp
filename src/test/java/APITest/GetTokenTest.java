@@ -1,5 +1,6 @@
 package APITest;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import ru.resful.booker.auth.UserProvider;
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.notNullValue;
         @Tag("API_AUTH")
 
 })
+@DisplayName("Get token test")
 public class GetTokenTest {
     private static final UserModel adm = UserProvider.getUserByName(Users.ADMIN_ROLE);
 
