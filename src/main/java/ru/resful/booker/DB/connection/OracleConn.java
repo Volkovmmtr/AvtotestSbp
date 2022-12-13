@@ -6,7 +6,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 @Singleton
-public class OracleConn implements DBConnection{
+public class OracleConn implements DBConnection {
 
     @Getter
     public Jdbi jdbi = setConnection();

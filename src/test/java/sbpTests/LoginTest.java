@@ -7,7 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends BaseTest {
     public BaseSteps baseSteps;
-    @Test
+    //@Test
     @Description("Авторизация в интернет банке БСБП")
     void loginTest() {
 
@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
         baseSteps.frameOut();
     }
 
-    @Test
+    //@Test
     @Description("Авторизация в интернет банке БСБП ")
     void test2() {
     }

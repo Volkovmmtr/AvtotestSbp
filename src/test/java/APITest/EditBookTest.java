@@ -3,6 +3,8 @@ package APITest;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import ru.resful.booker.APIClients.EndpointProvider;
 import ru.resful.booker.auth.UserProvider;
@@ -13,10 +15,11 @@ import ru.resful.booker.models.BookingModel;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class EditBook {
 
-    EndpointProvider client = ClientFactory.getClient(
-            UserProvider.getUserByName(Users.ADMIN_ROLE), true);
+@Tag("API")
+public class EditBookTest {
+
+    EndpointProvider client = ClientFactory.getClient(UserProvider.getUserByName(Users.ADMIN_ROLE), true);
 
     //тут у меня вопрос по jupiter
     //Если в классе будет несколько тестов, то у всех будут свои экземпляры?
@@ -24,7 +27,7 @@ public class EditBook {
 
     @BeforeEach
     @SneakyThrows
-    public void preconditions(){
+    public void preconditions() {
         oldBook = client.addBook(BookingGenerator.getNewBook()).execute().body();
     }
 

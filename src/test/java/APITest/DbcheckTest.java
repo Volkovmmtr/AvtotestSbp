@@ -5,12 +5,14 @@ import com.google.inject.Key;
 import com.google.inject.name.Names;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.resful.booker.DB.DBSteps;
 import ru.resful.booker.DB.connection.DBConnection;
 
 
-public class Dbcheck extends DBInjector{
+@Tag("DB")
+public class DbcheckTest extends DBInjector{
 
     private DBSteps dbSteps;
     @BeforeEach
