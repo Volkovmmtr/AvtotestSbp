@@ -1,8 +1,8 @@
-package ru.resful.booker.DB.connection;
+package ru.resful.booker.DB;
 
 import org.jdbi.v3.core.Jdbi;
 
 public interface DBConnection {
 
-    Jdbi getJdbi();
+    <T> T getConnection();
 }

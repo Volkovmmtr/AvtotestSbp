@@ -5,6 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({"file:./src/main/resources/db.properties"})
 public interface DBConfig extends Config {
 
+    //postgres
     @Key("db.psql_url")
     String getPsqlUrl();
 
@@ -14,6 +15,7 @@ public interface DBConfig extends Config {
     @Key("db.psql_user_pass")
     String getPsglPassword();
 
+    //oracle
     @Key("db.oracle_url")
     String getOracleUrl();
 
@@ -23,5 +25,7 @@ public interface DBConfig extends Config {
     @Key("db.oracle_user_pass")
     String getOraclePassword();
 
-
+    //mongodb
+    @Key("db.mongo_url")
+    String getMongoUrl();
 }

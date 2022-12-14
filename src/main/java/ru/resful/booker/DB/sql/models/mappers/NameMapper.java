@@ -1,8 +1,8 @@
-package ru.resful.booker.DB.models.mappers;
+package ru.resful.booker.DB.sql.models.mappers;
 
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
-import ru.resful.booker.DB.models.NamePOJO;
+import ru.resful.booker.DB.sql.models.NamePOJO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

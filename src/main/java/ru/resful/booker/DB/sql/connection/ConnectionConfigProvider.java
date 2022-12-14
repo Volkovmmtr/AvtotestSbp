@@ -1,4 +1,4 @@
-package ru.resful.booker.DB.connection;
+package ru.resful.booker.DB.sql.connection;
 
 import lombok.Getter;
 import org.aeonbits.owner.ConfigFactory;

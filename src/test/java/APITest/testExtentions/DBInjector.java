@@ -5,7 +5,6 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import lombok.Getter;
 import org.junit.jupiter.api.BeforeAll;
-import ru.resful.booker.DB.connection.DBConnection;
 
 public class DBInjector {
     @Getter
@@ -13,7 +12,7 @@ public class DBInjector {
 
     @BeforeAll
     public static void inject(){
-        Module module = new InjectorModule();
+        Module module = new DBInjectorModule();
         injector = Guice.createInjector(module);
     }
 }
