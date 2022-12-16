@@ -1,4 +1,4 @@
-package ru.resful.booker.models;
+package ru.resful.booker.models.universal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

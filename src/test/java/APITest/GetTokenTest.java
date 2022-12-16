@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Tags;
 import ru.resful.booker.auth.UserProvider;
 import ru.resful.booker.auth.Users;
 import ru.resful.booker.clientFactorys.ClientFactory;
-import ru.resful.booker.models.UserModel;
+import ru.resful.booker.clientFactorys.ConverterType;
+import ru.resful.booker.models.universal.UserModel;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import retrofit2.*;
@@ -26,7 +27,7 @@ public class GetTokenTest {
     @Test
     @DisplayName("Get token test")
     public void test(){
-        Response<String> model = ClientFactory.getClient().getToken(adm).execute();
+        Response<String> model = ClientFactory.getClient(ConverterType.JSON).getToken(adm).execute();
         //assertThat(model.body().getToken(), notNullValue());
     }
 }

@@ -2,9 +2,11 @@ package ru.resful.booker.APIClients.booker;
 
 import retrofit2.Call;
 import retrofit2.http.*;
-import ru.resful.booker.models.BookingModel;
+import ru.resful.booker.models.universal.BookingModel;
+import ru.resful.booker.models.responce.WrappedBookingModel;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookingClient{
 
@@ -22,19 +24,27 @@ public interface BookingClient{
     // Response вернётся в формате List<BookingModel>
     // @Query анотация ретрофита - означает параметр, который должен быть указан в url запроса
     Call<List<BookingModel>> getBookingIDsFilter(@Query("firstname") String firstname,
-                                           @Query("lastname") String lastname);
-    @Headers({"Accept: application/json"})
+                                                 @Query("lastname") String lastname);
+    //@Headers({"Accept: application/json"})
     // @Path - подставновка в EdnPoint значения id
     @GET("/booking/{id}")
-    Call<BookingModel> getBookById(@Path("id") String id);
+    Call<BookingModel> getBookById(@Path("id") String id, @HeaderMap Map<String,String> headers);
 
     @PUT("/booking/{id}")
-    @Headers({"Accept: application/json"})
+    //@Headers({"Accept: application/json"})
     // @Body - анотация ретрофита - означает тело передаваемое в http запросе. Тело представляет собой модель
     // Модель конвертируется в JSON за счёт библиотеки gson, которая подключается на шаге конфигурироваия Клиента Retrofit
-    Call<BookingModel> editBook(@Path("id") String bookId, @Body BookingModel book);
+    Call<BookingModel> editBook(@Path("id") String bookId, @Body BookingModel book, @HeaderMap Map<String,String> headers);
 
+    /*
     @POST("booking")
     @Headers({"Accept: application/json", "Content-Type: application/json"})
+    //@Headers({"Accept: application/xml", "Content-Type: text/xml"})
     Call<BookingModel> addBook(@Body BookingModel book);
+     */
+
+    @POST("booking")
+    //@Headers({"Accept: application/json", "Content-Type: application/json"})
+    //@Headers({"Accept: application/xml", "Content-Type: text/xml"})
+    Call<WrappedBookingModel> addBook(@Body BookingModel book, @HeaderMap Map<String,String> headers);
 }

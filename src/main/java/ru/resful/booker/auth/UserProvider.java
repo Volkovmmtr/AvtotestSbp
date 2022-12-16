@@ -1,7 +1,7 @@
 package ru.resful.booker.auth;
 
 import com.google.gson.Gson;
-import ru.resful.booker.models.UserModel;
+import ru.resful.booker.models.universal.UserModel;
 
 import java.io.IOException;
 import java.nio.file.Files;
