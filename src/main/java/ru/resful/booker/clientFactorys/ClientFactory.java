@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.jaxb.JaxbConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import ru.resful.booker.APIClients.EndpointProvider;
+import ru.resful.booker.APIClients.booker.BookingClient;
 import ru.resful.booker.auth.TokenRepo;
 import ru.resful.booker.models.universal.UserModel;
 
@@ -19,17 +19,17 @@ public class ClientFactory {
     private final static String BASE_URL = "https://restful-booker.herokuapp.com/";
 
     // Магия ретрофита
-    public static EndpointProvider getClient(ConverterType converter) {
+    public static BookingClient getClient(ConverterType converter) {
         // создаём экземпляр сконфигурированного OkHttp билдера
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
         // Создаём клиента Retrofit инкапсулирующего OkHttp клиента (okHttpBuilder.build())
         return getBaseRetrofit(okHttpBuilder.build(), converter)
                 // Клиенту передаём описание API в вформате интерфейса
-                .create(EndpointProvider.class);
+                .create(BookingClient.class);
     }
 
     @SneakyThrows
-    public static EndpointProvider getClient(UserModel user, Boolean useToken, ConverterType converter) {
+    public static BookingClient getClient(UserModel user, Boolean useToken, ConverterType converter) {
         OkHttpClient.Builder okHttpBuilder = getConfiguredHttpBuilder();
         // создаём перехватчика и добавляем в клиент OkHttp. Роль перехватчика - это добавление в хедера авторизации по методы BaseAuth
         String token;
@@ -49,7 +49,7 @@ public class ClientFactory {
             return chain.proceed(newRequest);
         });
         return getBaseRetrofit(okHttpBuilder.build(), converter)
-                .create(EndpointProvider.class); // в этой строке самый смак
+                .create(BookingClient.class); // в этой строке самый смак
         //ретрофит генерирует реализацию RequestBody на основе переданного ему интерфейса
         //+ читаемость -строки кода
     }

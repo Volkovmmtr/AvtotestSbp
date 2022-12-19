@@ -14,31 +14,22 @@ import javax.xml.bind.annotation.*;
 public class BookingModel {
 
     //по умолчанию имя в json должно быть = имени переменной
-    @XmlElement
     private String firstname;
 
-    @XmlElement
     private String lastname;
 
-    @XmlElement
     private Integer totalprice;
 
-    @XmlElement
     private Boolean depositpaid;
 
-    @XmlElement
     private String additionalneeds;
 
-    @XmlElement
     private Bookingdates bookingdates;
 
 
     //если желательно переименовать
     //bookingid - имя в json
     //@SerializedName("bookingid")
-    @XmlElement
-    private String bookingid;
-
 
     @Getter
     @Setter

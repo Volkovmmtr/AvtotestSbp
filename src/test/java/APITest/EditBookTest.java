@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.resful.booker.APIClients.EndpointProvider;
+import ru.resful.booker.APIClients.booker.BookingClient;
 import ru.resful.booker.auth.UserProvider;
 import ru.resful.booker.auth.Users;
 import ru.resful.booker.clientFactorys.ClientFactory;
@@ -33,7 +33,7 @@ public class EditBookTest {
     @ParameterizedTest
     @MethodSource("testDataProvider")
     public void test(Map<String, String> header, ConverterType converter) {
-        EndpointProvider client = ClientFactory.getClient(UserProvider.getUserByName(Users.ADMIN_ROLE),
+        BookingClient client = ClientFactory.getClient(UserProvider.getUserByName(Users.ADMIN_ROLE),
                 true, converter);
 
         WrappedBookingModel oldBook = client.addBook(BookingGenerator.getNewBook(), header).execute().body();

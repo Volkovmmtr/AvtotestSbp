@@ -8,7 +8,7 @@ import ru.resful.booker.models.responce.WrappedBookingModel;
 import java.util.List;
 import java.util.Map;
 
-public interface BookingClient{
+public interface BookingClient extends AuthClient{
 
 
     //Не перезаписывает заголовки, при наличии дубликатов они будут отправлены
