@@ -7,6 +7,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,6 +27,15 @@ public class BaseTest {
 
     @BeforeEach
     void before(){
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability( "enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+        Configuration.browserCapabilities = capabilities;
+
+
         open(baseUrl);
         logoImg.shouldBe(visible);
         baseSteps = new BaseSteps();
