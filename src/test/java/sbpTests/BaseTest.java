@@ -27,7 +27,7 @@ public class BaseTest {
 
     @BeforeEach
     void before(){
-        Configuration.remote = "http://172.21.0.3:4444/wd/hub";
+        Configuration.remote = "http://172.20.0.3:4444/wd/hub";
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         DesiredCapabilities capabilities = new DesiredCapabilities();
