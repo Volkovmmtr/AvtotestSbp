@@ -39,7 +39,7 @@ public class EditBookTest {
         client.editBook(oldBook.getBookingid(), newBook, header)
                 .execute();
 
-        BookingModel editedBook = client.getBookById(oldBook.getBookingid(), header).execute().body();
+        BookingModel editedBook = client.getBookById(oldBook.getBookingid(), header).execute().body(); 
 
         //todo сравнения объектов стоит отдельно вынести и сравнивать по конкретным полям
         assertThat(newBook.getBookingdates(), Matchers.samePropertyValuesAs(editedBook.getBookingdates()));
