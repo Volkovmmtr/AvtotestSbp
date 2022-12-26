@@ -26,9 +26,6 @@ import static ru.resful.booker.APIClients.booker.DefaultHeaders.XML_HEADER;
 @Tag("API")
 public class EditBookTest {
 
-    //тут у меня вопрос по jupiter
-    //Если в классе будет несколько тестов, то у всех будут свои экземпляры?
-
     @SneakyThrows
     @ParameterizedTest
     @MethodSource("testDataProvider")
