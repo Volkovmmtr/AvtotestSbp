@@ -30,7 +30,7 @@ public class EditBookTest {
     @ParameterizedTest
     @MethodSource("testDataProvider")
     public void test(Map<String, String> header, ConverterType converter) {
-        BookingClient client = ClientFactory.getClient(UserProvider.getUserByName(Users.ADMIN_ROLE),
+        BookingClient client = ClientFactory.getClient(UserProvider.getUserByName(Users.ADMIN_ROLE), 
                 true, converter);
 
         WrappedBookingModel oldBook = client.addBook(BookingGenerator.getNewBook(), header).execute().body();
