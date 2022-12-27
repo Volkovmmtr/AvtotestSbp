@@ -12,7 +12,6 @@ tools {
 		stage ("Git") {
 
 			steps{
-				git credentialsId: 'AOdincov', url: 'https://github.com/Volkovmmtr/AvtotestSbp'
 				git branch: 'AOdincov', url: 'https://github.com/Volkovmmtr/AvtotestSbp'
 			}
 		}
