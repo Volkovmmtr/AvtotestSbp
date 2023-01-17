@@ -3,8 +3,12 @@ package ru.resful.booker.models.universal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import ru.resful.booker.xmlAdaptors.MapAdapter;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Accessors(chain = true)
 @Setter
@@ -24,20 +28,13 @@ public class BookingModel {
 
     private String additionalneeds;
 
-    private Bookingdates bookingdates;
+    @XmlJavaTypeAdapter(value = MapAdapter.class)
+    private Map<String, String> bookingdates = new HashMap<String, String>();
 
 
     //если желательно переименовать
     //bookingid - имя в json
     //@SerializedName("bookingid")
 
-    @Getter
-    @Setter
-    @XmlRootElement(name = "bookingdates")
-    @XmlAccessorType(XmlAccessType.FIELD)
-    public static class Bookingdates{
-        private String checkin;
-        private String checkout;
-    }
 
 }
