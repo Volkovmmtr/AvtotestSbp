@@ -1,9 +1,8 @@
-package ru.resful.booker.DB.nosql;
+package ru.resful.booker.DB.nosql.mongo;
 
 import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import ru.resful.booker.DB.nosql.models.NameModel;
+import ru.resful.booker.DB.nosql.mongo.models.NameModel;
 
 public class DBDao {
 

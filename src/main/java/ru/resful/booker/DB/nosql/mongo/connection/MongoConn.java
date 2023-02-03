@@ -1,4 +1,4 @@
-package ru.resful.booker.DB.nosql.connection;
+package ru.resful.booker.DB.nosql.mongo.connection;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 import ru.resful.booker.DB.DBConnection;
-import ru.resful.booker.DB.nosql.connection.MongoConn;
+import ru.resful.booker.DB.nosql.mongo.connection.MongoConn;
 import ru.resful.booker.DB.sql.connection.OracleConn;
 import ru.resful.booker.DB.sql.connection.PSQLConn;
 

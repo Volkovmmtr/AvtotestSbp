@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Reader {
 
-    public static List<String> getAllMessagesFromTopic(String topicName) {
+    public static List<String> getAllMessagesFromTopic(String topicName, int partitionNum) {
         List<String> values = new ArrayList<>();
-
+        KafkaPropertiesProvider.getGetterProps();
         try (KafkaConsumer<Long, String> consumer = new KafkaConsumer<>(KafkaPropertiesProvider.getGetterProps())) {
-            List<TopicPartition> tps = Collections.singletonList(new TopicPartition(topicName, 0));
+            List<TopicPartition> tps = Collections.singletonList(new TopicPartition(topicName ,partitionNum));
             consumer.assign(tps);
             consumer.seekToBeginning(tps);
             ConsumerRecords<Long, String> consumerRecords = consumer.poll(

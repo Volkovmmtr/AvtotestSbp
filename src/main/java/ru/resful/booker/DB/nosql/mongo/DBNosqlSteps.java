@@ -1,9 +1,9 @@
-package ru.resful.booker.DB.nosql;
+package ru.resful.booker.DB.nosql.mongo;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import ru.resful.booker.DB.DBConnection;
-import ru.resful.booker.DB.nosql.models.NameModel;
+import ru.resful.booker.DB.nosql.mongo.models.NameModel;
 
 public class DBNosqlSteps {
 

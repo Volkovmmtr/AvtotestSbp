@@ -26,7 +26,7 @@ public class KafkaCheckTest {
         String msg = RandomStringUtils.random(14,true,false);
 
         Sender.sendMessage("test.topic",msg);
-        List<String> messages = Reader.getAllMessagesFromTopic("test.topic");
+        List<String> messages = Reader.getAllMessagesFromTopic("test.topic",0);
 
         assertThat(messages, hasItem(msg));
     }

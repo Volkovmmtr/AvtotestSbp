@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.resful.booker.DB.DBConnection;
-import ru.resful.booker.DB.nosql.DBNosqlSteps;
+import ru.resful.booker.DB.nosql.mongo.DBNosqlSteps;
 
 public class CheckMongo extends DBInjector {
 

@@ -1,4 +1,4 @@
-package ru.resful.booker.DB.nosql.models;
+package ru.resful.booker.DB.nosql.mongo.models;
 
 
 import lombok.AllArgsConstructor;
