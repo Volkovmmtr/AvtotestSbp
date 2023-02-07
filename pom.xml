@@ -169,6 +169,7 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase</artifactId>
             <version>${hbase.version}</version>
+            <type>pom</type>
         </dependency>
 
 
